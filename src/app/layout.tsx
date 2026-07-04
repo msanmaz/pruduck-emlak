@@ -22,6 +22,7 @@ export const metadata: Metadata = {
   title: "Produck — Emlak Fotoğraflarını Videoya Dönüştür",
   description:
     "Emlak ilanınız için profesyonel ev gezintisi videosu. Fotoğraflarınızı 24 saatte videoya dönüştürüyoruz. 1.500 TL'dan başlayan fiyatlarla.",
+  themeColor: "#1A1B1D",
   openGraph: {
     locale: "tr_TR",
     type: "website",
