@@ -3,11 +3,22 @@
 import { useState } from "react";
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [note, setNote] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setStatus("loading");
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, phone, note }),
+    });
+
+    setStatus(res.ok ? "success" : "error");
   };
 
   return (
@@ -42,7 +53,7 @@ export default function Contact() {
           </div>
 
           <div>
-            {submitted ? (
+            {status === "success" ? (
               <div className="h-full flex items-center">
                 <div>
                   <p className="font-display font-black text-3xl text-accent mb-2">
@@ -62,6 +73,8 @@ export default function Contact() {
                   <input
                     type="text"
                     required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="Adınız ve soyadınız"
                     className="w-full bg-bg border border-border text-text font-body text-sm px-4 py-3 outline-none focus:border-accent transition-colors placeholder:text-muted/50"
                   />
@@ -73,25 +86,38 @@ export default function Contact() {
                   <input
                     type="tel"
                     required
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     placeholder="0555 000 00 00"
                     className="w-full bg-bg border border-border text-text font-body text-sm px-4 py-3 outline-none focus:border-accent transition-colors placeholder:text-muted/50"
                   />
                 </div>
                 <div>
                   <label className="font-body text-xs font-medium tracking-widest uppercase text-muted block mb-2">
-                    Notunuz <span className="text-muted/50 lowercase normal-case">(isteğe bağlı)</span>
+                    Notunuz{" "}
+                    <span className="text-muted/50 lowercase normal-case">(isteğe bağlı)</span>
                   </label>
                   <textarea
                     rows={3}
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
                     placeholder="Daire hakkında kısa bilgi..."
                     className="w-full bg-bg border border-border text-text font-body text-sm px-4 py-3 outline-none focus:border-accent transition-colors placeholder:text-muted/50 resize-none"
                   />
                 </div>
+
+                {status === "error" && (
+                  <p className="font-body text-xs text-red-400">
+                    Bir sorun oluştu, lütfen tekrar deneyin.
+                  </p>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full font-body font-medium bg-accent text-bg rounded-full py-4 hover:bg-accent/90 transition-colors"
+                  disabled={status === "loading"}
+                  className="w-full font-body font-medium bg-accent text-bg rounded-full py-4 hover:bg-accent/90 transition-colors disabled:opacity-60"
                 >
-                  Gönder →
+                  {status === "loading" ? "Gönderiliyor..." : "Gönder →"}
                 </button>
               </form>
             )}
