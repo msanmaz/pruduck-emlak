@@ -26,8 +26,7 @@ export default function Hero() {
         >
           <source src="/videos/tour-01.mp4" type="video/mp4" />
         </video>
-        {/* Gradient: opaque only at bottom where text lives, transparent at top so video breathes */}
-        <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1B1D] via-[#1A1B1D]/60 to-[#1A1B1D]/10" />
       </div>
 
       {/* Content */}
