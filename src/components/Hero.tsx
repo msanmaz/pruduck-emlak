@@ -26,8 +26,8 @@ export default function Hero() {
         >
           <source src="/videos/tour-01.mp4" type="video/mp4" />
         </video>
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/60 to-bg/10" />
+        {/* Gradient: opaque only at bottom where text lives, transparent at top so video breathes */}
+        <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/50 to-transparent" />
       </div>
 
       {/* Content */}
@@ -36,7 +36,7 @@ export default function Hero() {
           <p className="font-body text-xs font-medium tracking-widest uppercase text-accent mb-6">
             Emlak Medya Hizmetleri
           </p>
-          <h1 className="font-display font-black text-5xl md:text-7xl lg:text-8xl text-text leading-[0.95] tracking-tight mb-8">
+          <h1 className="font-display font-black text-[clamp(1.75rem,7vw,5.5rem)] text-text leading-[0.95] tracking-tight mb-8">
             İlan Fotoğrafınızı
             <br />
             <span className="italic text-accent">Ev Gezintisi</span>
