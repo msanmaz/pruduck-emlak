@@ -40,5 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# large video assets — host separately (too large for GitHub)
-/public/videos/
+# env
+.env.local
