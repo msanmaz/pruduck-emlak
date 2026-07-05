@@ -22,7 +22,6 @@ export default function Hero() {
           loop
           playsInline
           preload="metadata"
-          poster="/images/produck-showcase.jpeg"
         >
           <source src="/videos/tour-01.mp4" type="video/mp4" />
         </video>
