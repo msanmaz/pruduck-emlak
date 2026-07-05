@@ -18,10 +18,11 @@ export default function Hero() {
         <video
           ref={videoRef}
           className="w-full h-full object-cover"
+          autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
         >
           <source src="/videos/tour-01.mp4" type="video/mp4" />
         </video>
